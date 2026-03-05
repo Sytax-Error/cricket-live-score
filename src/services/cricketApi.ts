@@ -17,25 +17,25 @@ export interface CricketMatch {
 
 // You can get a free API key from: https://cricapi.com/
 // For this demo, using test_key which has limited requests
-const API_KEY = 'test_key'; // Replace with your free API key from cricapi.com
-const BASE_URL = 'https://api.cricapi.com/v1';
+const API_KEY = "test_key"; // Replace with your free API key from cricapi.com
+const BASE_URL = "https://api.cricapi.com/v1";
 
 export const cricketApi = {
   // Get current live matches
   getCurrentMatches: async (): Promise<CricketMatch[]> => {
     try {
       const response = await fetch(
-        `${BASE_URL}/currentMatches?apikey=${API_KEY}`
+        `${BASE_URL}/currentMatches?apikey=${API_KEY}`,
       );
-      
+
       if (!response.ok) {
-        throw new Error('Failed to fetch matches');
+        throw new Error("Failed to fetch matches");
       }
-      
+
       const data = await response.json();
       return data.data || [];
     } catch (error) {
-      console.error('Error fetching current matches:', error);
+      console.error("Error fetching current matches:", error);
       return [];
     }
   },
@@ -44,17 +44,17 @@ export const cricketApi = {
   getMatchDetails: async (matchId: string): Promise<CricketMatch | null> => {
     try {
       const response = await fetch(
-        `${BASE_URL}/matchInfo?matchId=${matchId}&apikey=${API_KEY}`
+        `${BASE_URL}/matchInfo?matchId=${matchId}&apikey=${API_KEY}`,
       );
-      
+
       if (!response.ok) {
-        throw new Error('Failed to fetch match details');
+        throw new Error("Failed to fetch match details");
       }
-      
+
       const data = await response.json();
       return data.data || null;
     } catch (error) {
-      console.error('Error fetching match details:', error);
+      console.error("Error fetching match details:", error);
       return null;
     }
   },
@@ -62,18 +62,16 @@ export const cricketApi = {
   // Get series data
   getSeries: async (): Promise<any[]> => {
     try {
-      const response = await fetch(
-        `${BASE_URL}/series?apikey=${API_KEY}`
-      );
-      
+      const response = await fetch(`${BASE_URL}/series?apikey=${API_KEY}`);
+
       if (!response.ok) {
-        throw new Error('Failed to fetch series');
+        throw new Error("Failed to fetch series");
       }
-      
+
       const data = await response.json();
       return data.data || [];
     } catch (error) {
-      console.error('Error fetching series:', error);
+      console.error("Error fetching series:", error);
       return [];
     }
   },
